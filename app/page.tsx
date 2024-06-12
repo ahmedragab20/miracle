@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
 export default function Home() {
@@ -11,7 +10,7 @@ export default function Home() {
             news to the believers—who do good—that they will have a mighty
             reward
           </h2>
-          <h2 className="text-xl max-w-3xl text-center font-uthman  bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-800">
+          <h2 className="text-xl max-w-3xl text-center font-uthman bg-clip-text text-transparent bg-gradient-to-r from-gray-900 via-gray-700 to-gray-800">
             إِنَّ هَـٰذَا ٱلْقُرْءَانَ يَهْدِى لِلَّتِى هِىَ أَقْوَمُ
             وَيُبَشِّرُ ٱلْمُؤْمِنِينَ ٱلَّذِينَ يَعْمَلُونَ ٱلصَّـٰلِحَـٰتِ
             أَنَّ لَهُمْ أَجْرًۭا كَبِيرًۭا ٩
@@ -27,13 +26,6 @@ export default function Home() {
         </div>
       </section>
       <hr className="max-w-sm mx-auto" />
-      {/* <section className="container mx-auto">
-        <div className="flex gap-3">
-          <div className="flex-1 border border-indigo-600"></div>
-          <div className="flex-1 border border-sky-600"></div>
-          <div className="flex-1 border border-green-600"></div>
-        </div>
-      </section> */}
     </>
   );
 }

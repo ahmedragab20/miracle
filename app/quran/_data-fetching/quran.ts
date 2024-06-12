@@ -1,11 +1,8 @@
-import { unstable_noStore } from "next/cache";
-
-export async function getQuranItems() {
+export async function getQuranItems<T>(): Promise<T | undefined> {
   try {
-    unstable_noStore();
-    return await fetch(`http://localhost:3000/api/quran`, {
-      next: { revalidate: 30 }
-    }).then(res => res.json());
+    return (await fetch(`http://localhost:3000/api/quran`).then(res =>
+      res.json()
+    )) as T;
   } catch (error) {
     console.error(error);
   }

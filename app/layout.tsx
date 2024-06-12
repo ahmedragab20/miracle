@@ -39,6 +39,9 @@ export default function RootLayout({
           </nav>
         </header>
         <main>{children}</main>
+        <footer className="mt-10 py-10 text-center">
+          Alhamdullah <small>❤️</small>
+        </footer>
       </body>
     </html>
   );
