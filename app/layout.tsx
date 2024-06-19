@@ -31,7 +31,7 @@ export default function RootLayout({
         className={`${playfair.variable} ${UthmanTN1.variable} font-playfair`}
       >
         <header>
-          <nav className="container mx-auto py-1 h-9 flex items-center">
+          <nav className="container mx-auto py-5 flex items-center">
             <Link href="/" className="flex items-center gap-1">
               <ShadowInnerIcon />
               Miracle

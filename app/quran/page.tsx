@@ -7,7 +7,7 @@ export default async function Quran() {
   const quran = await getQuranItems<IChapter[]>();
 
   return (
-    <div className="mt-10 container mx-auto">
+    <div className="mt-5 container mx-auto">
       <Suspense fallback={null}>
         <div>
           {quran?.length ? (
