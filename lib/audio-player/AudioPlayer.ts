@@ -33,6 +33,7 @@ export default class AudioPlayer {
     audioElement.id = this.audio_key;
     audioElement.controls = opts?.controllers ?? false;
     audioElement.preload = opts.preload ?? "none";
+
     this.audio = audioElement;
 
     const audioPlayerEngine = new AudioPlayerEngine();
@@ -66,8 +67,8 @@ export default class AudioPlayer {
   public stop(): void {
     if (!this.audio) throw new Error("no audio initialized");
 
-    this.audio.pause();
     this.setCurrentTime(0);
+    this.audio.pause();
   }
 
   public pauseAll() {
@@ -87,7 +88,7 @@ export default class AudioPlayer {
   }
 
   /**
-   * 🚨 not safe..
+   * 🚨 not safe yet..
    */
   public toggle(): void {
     if (!this.audio) throw new Error("no audio initialized");
@@ -110,8 +111,7 @@ export default class AudioPlayer {
 
   public setCurrentTime(time: number): void {
     if (!this.audio) throw new Error("no audio initialized");
-    if (!time || time === Infinity) return;
-    if (time < 0) {
+    if (time < 0 || time === Infinity) {
       time = 0;
     }
 

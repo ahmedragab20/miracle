@@ -2,27 +2,23 @@
 "use client";
 
 import { PlayIcon, PauseIcon, StopIcon } from "@radix-ui/react-icons";
-import { AudioPlayerEngine } from "@/lib/audio-player/AudioPlayerEngine";
-import { memo, useEffect, useId, useRef, useState } from "react";
+import { memo, useId } from "react";
 import AudioPlayer from "@/lib/audio-player/AudioPlayer";
-import { AudioPlayerEntity } from "@/lib/audio-player/audio-player";
 import { Button } from "@/components/ui/button";
+import { AudioOptions } from "@/lib/audio-player/audio-player";
 
-export default memo(function AudioPlayerComponent(
-  {
-    /**
-     * TODO:: mirror the AudioPlayer props with the component's props;
-     */
-  }
-) {
+export default memo(function AudioPlayerComponent(props: AudioOptions) {
+  if (!props.src) throw TypeError("[400] the src (source) prop is missing");
+
   const id = useId();
   let audioPlayer;
-  console.log({});
 
   if (!audioPlayer) {
     audioPlayer = new AudioPlayer({
-      src: `https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/36.mp3`,
-      key: id
+      src: props.src,
+      key: props?.key || id,
+      controllers: props?.controllers,
+      preload: props?.preload
     });
   }
 
@@ -44,15 +40,33 @@ export default memo(function AudioPlayerComponent(
   return (
     <div>
       <div className="max-w-full space-x-2 border p-3 rounded-xl flex justify-center items-center">
-        <Button tabIndex={1} onClick={audioPlayer.play}>
-          <PauseIcon />
-        </Button>
-
-        <Button tabIndex={1} onClick={audioPlayer.pause}>
+        <Button
+          className="rounded-xl"
+          tabIndex={1}
+          onClick={() => {
+            audioPlayer.play.call(audioPlayer);
+          }}
+        >
           <PlayIcon />
         </Button>
 
-        <Button tabIndex={1} onClick={audioPlayer.pauseAll}>
+        <Button
+          className="rounded-xl"
+          tabIndex={1}
+          onClick={() => {
+            audioPlayer.pause.call(audioPlayer);
+          }}
+        >
+          <PauseIcon />
+        </Button>
+
+        <Button
+          className="rounded-xl"
+          tabIndex={1}
+          onClick={() => {
+            audioPlayer.stop.call(audioPlayer);
+          }}
+        >
           <StopIcon />
         </Button>
       </div>

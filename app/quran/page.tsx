@@ -9,15 +9,13 @@ export default async function Quran() {
   return (
     <div className="mt-5 container mx-auto">
       <Suspense fallback={null}>
-        <div>
-          {quran?.length ? (
-            <QuranList quran={quran} />
-          ) : (
-            <div className="text-center mt-10 text-red-500">
-              something went wrong! sorry.
-            </div>
-          )}
-        </div>
+        {quran?.length ? (
+          <QuranList quran={quran} />
+        ) : (
+          <div className="text-center mt-10 text-red-500">
+            Something went wrong! sorry.
+          </div>
+        )}
       </Suspense>
     </div>
   );
