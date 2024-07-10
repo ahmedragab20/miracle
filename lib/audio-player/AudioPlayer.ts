@@ -37,10 +37,12 @@ export default class AudioPlayer {
 
     const audioPlayerEngine = new AudioPlayerEngine();
     audioPlayerEngine.createAudio(this.audio);
+
+    // TODO: instead of storing the html audio element, store the instance of the class to have all if its methods available when you grant them later;
   }
 
   /**
-   * Separate the naming between the AudioPlayer Type and the HTMLAudioElement
+   *  TODO: Separate the naming between the AudioPlayer Type and the HTMLAudioElement;
    */
 
   // 🧮 computed
@@ -69,6 +71,7 @@ export default class AudioPlayer {
   }
 
   public pauseAll() {
+    // TODO: replace pause with the stop function;
     audioStore.keys().forEach(k => {
       const audio = audioStore.grant<HTMLAudioElement>(k);
 

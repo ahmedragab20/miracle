@@ -6,6 +6,7 @@ import { AudioPlayerEngine } from "@/lib/audio-player/AudioPlayerEngine";
 import { memo, useEffect, useId, useRef, useState } from "react";
 import AudioPlayer from "@/lib/audio-player/AudioPlayer";
 import { AudioPlayerEntity } from "@/lib/audio-player/audio-player";
+import { Button } from "@/components/ui/button";
 
 export default memo(function AudioPlayerComponent(
   {
@@ -40,41 +41,20 @@ export default memo(function AudioPlayerComponent(
   audioPlayer.onTimeUpdate(time => {
     console.log("onTimeUpdate...", time);
   });
-
-  let testAudio: AudioPlayerEntity;
-
-  const [running, setRunning] = useState(false);
   return (
     <div>
       <div className="max-w-full space-x-2 border p-3 rounded-xl flex justify-center items-center">
-        <button
-          tabIndex={1}
-          className="p-2 hover:shadow rounded-lg bg-blue-600 text-white"
-          onClick={() => {
-            audioPlayer.play();
-          }}
-        >
-          <PlayIcon />
-        </button>
-        <button
-          tabIndex={1}
-          className="p-2 hover:shadow rounded-lg bg-orange-600 text-white"
-          onClick={() => {
-            audioPlayer.pause();
-          }}
-        >
+        <Button tabIndex={1} onClick={audioPlayer.play}>
           <PauseIcon />
-        </button>
+        </Button>
 
-        <button
-          tabIndex={1}
-          className="p-2 hover:shadow rounded-lg bg-red-600 text-white"
-          onClick={() => {
-            audioPlayer.pauseAll();
-          }}
-        >
+        <Button tabIndex={1} onClick={audioPlayer.pause}>
+          <PlayIcon />
+        </Button>
+
+        <Button tabIndex={1} onClick={audioPlayer.pauseAll}>
           <StopIcon />
-        </button>
+        </Button>
       </div>
     </div>
   );
