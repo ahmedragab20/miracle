@@ -1,38 +1,81 @@
 // TODO: add metadata
 "use client";
 
-import { PlayIcon, PauseIcon } from "@radix-ui/react-icons";
+import { PlayIcon, PauseIcon, StopIcon } from "@radix-ui/react-icons";
 import { AudioPlayerEngine } from "@/lib/audio-player/AudioPlayerEngine";
-import { useEffect, useId, useRef, useState } from "react";
-import Audio from "@/lib/audio-player/Audio";
-export default function AudioPlayer() {
-  const audioPlayerEngine = new AudioPlayerEngine();
-  const audioRef = useRef<HTMLAudioElement>();
+import { memo, useEffect, useId, useRef, useState } from "react";
+import AudioPlayer from "@/lib/audio-player/AudioPlayer";
+import { AudioPlayerEntity } from "@/lib/audio-player/audio-player";
+
+export default memo(function AudioPlayerComponent(
+  {
+    /**
+     * TODO:: mirror the AudioPlayer props with the component's props;
+     */
+  }
+) {
   const id = useId();
-  const audioPlayer = new Audio(id);
+  let audioPlayer;
+  console.log({});
 
-  const [count, setCount] = useState(0);
+  if (!audioPlayer) {
+    audioPlayer = new AudioPlayer({
+      src: `https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/36.mp3`,
+      key: id
+    });
+  }
 
-  useEffect(() => {
-    audioPlayerEngine.createAudio(audioRef.current!);
-    setCount(1);
-  }, [audioRef.current]);
+  audioPlayer.onBuffering(() => {
+    console.log("buffering...");
+  });
 
+  audioPlayer.onPlaying(() => {
+    console.log("Playing...");
+  });
+
+  audioPlayer.onPause(() => {
+    console.log("Paused.");
+  });
+
+  audioPlayer.onTimeUpdate(time => {
+    console.log("onTimeUpdate...", time);
+  });
+
+  let testAudio: AudioPlayerEntity;
+
+  const [running, setRunning] = useState(false);
   return (
-    <div key={count}>
-      <audio id={id} ref={audioRef as any} src="/001.mp3" hidden />
-      <div className="bg-slate-50">
-        <pre>{JSON.stringify(Audio.audio?.src)}</pre>
-      </div>
-      <div className="max-w-full border p-3 rounded-xl flex justify-center items-center">
+    <div>
+      <div className="max-w-full space-x-2 border p-3 rounded-xl flex justify-center items-center">
         <button
           tabIndex={1}
-          className="p-2 hover:shadow rounded-full bg-gradient-to-tl from-gray-500 via-gray-300 to-gray-700"
-          onClick={audioPlayer?.play}
+          className="p-2 hover:shadow rounded-lg bg-blue-600 text-white"
+          onClick={() => {
+            audioPlayer.play();
+          }}
         >
-          {Audio.audio?.paused ? <PauseIcon /> : <PlayIcon />}
+          <PlayIcon />
+        </button>
+        <button
+          tabIndex={1}
+          className="p-2 hover:shadow rounded-lg bg-orange-600 text-white"
+          onClick={() => {
+            audioPlayer.pause();
+          }}
+        >
+          <PauseIcon />
+        </button>
+
+        <button
+          tabIndex={1}
+          className="p-2 hover:shadow rounded-lg bg-red-600 text-white"
+          onClick={() => {
+            audioPlayer.pauseAll();
+          }}
+        >
+          <StopIcon />
         </button>
       </div>
     </div>
   );
-}
+});
