@@ -5,6 +5,7 @@ import { Playfair_Display } from "next/font/google";
 import localFont from "next/font/local";
 import { ShadowInnerIcon } from "@radix-ui/react-icons";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair"
@@ -31,11 +32,16 @@ export default function RootLayout({
         className={`${playfair.variable} ${UthmanTN1.variable} font-playfair`}
       >
         <header>
-          <nav className="container mx-auto py-5 flex items-center">
+          <nav className="container mx-auto py-5 flex items-center justify-between">
             <Link href="/" className="flex items-center gap-1">
               <ShadowInnerIcon />
               Miracle
             </Link>
+            <div>
+              <Link href="/listen" className="text-xs underline">
+                Listen only
+              </Link>
+            </div>
           </nav>
         </header>
         <main>{children}</main>
