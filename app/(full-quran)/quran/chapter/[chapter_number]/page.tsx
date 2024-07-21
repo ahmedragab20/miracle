@@ -3,5 +3,5 @@ export default function ChapterPage({
 }: {
   params: { chapter_number: string };
 }) {
-  return <div>{params.chapter_number}</div>;
+  return <div className="container mx-auto">{params.chapter_number}</div>;
 }
