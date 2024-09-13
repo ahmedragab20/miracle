@@ -1,6 +1,5 @@
 import { use } from "react";
 import { getChapter } from "./_fetch/EPs";
-import { headers } from "next/headers";
 
 export default function ChapterPage({
   params
