@@ -1,0 +1,18 @@
+import { use } from "react";
+import { getChapter } from "./_fetch/EPs";
+import { headers } from "next/headers";
+
+export default function ChapterPage({
+  params
+}: {
+  params: { chapter_number: string };
+}) {
+  const chapter = use(getChapter(params.chapter_number));
+  return (
+    <div className="container mx-auto">
+      <div>
+        <pre>{JSON.stringify(chapter, null, 2)}</pre>
+      </div>
+    </div>
+  );
+}
