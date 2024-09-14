@@ -25,6 +25,10 @@ export default class AudioPlayer {
   readonly audio_key: string;
   private readonly audio: HTMLAudioElement | null;
   constructor(opts: AudioOptions) {
+    if (typeof window === "undefined") {
+      throw TypeError("AudioPlayer is client-side only");
+    }
+
     if (!opts.src)
       throw TypeError("You must pass a source (src) to your audio");
 

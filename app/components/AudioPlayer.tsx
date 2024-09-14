@@ -13,7 +13,7 @@ export default memo(function AudioPlayerComponent(props: AudioOptions) {
   const id = useId();
   let audioPlayer;
 
-  if (!audioPlayer) {
+  if (!audioPlayer && typeof window !== "undefined") {
     audioPlayer = new AudioPlayer({
       src: props.src,
       key: props?.key || id,
@@ -21,6 +21,8 @@ export default memo(function AudioPlayerComponent(props: AudioOptions) {
       preload: props?.preload
     });
   }
+
+  if (!audioPlayer) return null;
 
   audioPlayer.onBuffering(() => {
     console.log("buffering...");
